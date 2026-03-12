@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Lily Dunk"
+  navbar:
+    left:
+      - href: resume.qmd
+        text: Résumé
+      - href: portfolio.qmd
+        text: Portfolio
+  page-footer: "Contact me at lily.b.dunk@protonmail.com"
+
+format:
+  html:
+    theme:
+      - darkly
+      - brand
+    css: styles.css
+    page-layout: full
+
+
+

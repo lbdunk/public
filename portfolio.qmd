@@ -1,0 +1,7 @@
+---
+title: "Portfolio"
+---
+
+[My full résumé is available here.](resume.qmd)
+
+[Portfolio project: When does winter actually start?](seasons.qmd)

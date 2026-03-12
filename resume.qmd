@@ -1,0 +1,205 @@
+---
+title: "Lily Dunk"
+---
+
+Hi, I'm Lily, a data analyst in Minneapolis, MN. Contact me at [lily.b.dunk\@protonmail.com](mailto:lily.b.dunk@protonmail.com).
+
+## Work Experience
+
+::::: grid
+::: g-col-3
+### Sep 2019 - Present
+:::
+
+::: g-col-9
+### Professional Data Analysts
+
+Minneapolis, MN | A research, evaluation, and consulting firm specializing in public health program evaluations.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+Sep 2019 - Sep 2021\
+Sep 2021 - Dec 2022\
+
+#### Dec 2022 - Present
+:::
+
+::: g-col-9
+Assistant Analyst II\
+Associate Analyst I
+
+#### Associate Analyst II
+ - Clean and analyze data for public health program evaluation projects, drawing conclusions about program efficacy from public monitoring, program utilization, and follow-up survey data.
+ - Lead data analysis for evaluation of tobacco cessation and control programs for the North Dakota Department of Health and Human Services and the Vermont Department of Health.
+ - Write and maintain R and SAS syntax to sample and analyze ongoing follow-up surveys of program participants, including stratified sampling and nonresponse weighting methods.
+ - Advise clients on analysis results and statistics concepts to guide data-driven decision making.
+ - Write reports and create tables, charts, and maps to explain analysis methods and communicate results for coworkers, clients, and the general public.
+ - Programmed automated data quality reports in R and Quarto with charts and alerts for easy review, making the data quality monitoring process more comprehensive and efficient.
+ - Wrote technical assistance and reference documents for LimeSurvey software and became the “resident LimeSurvey expert” for creating and managing surveys and training coworkers.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+### Jun 2019 - Aug 2019
+:::
+
+::: g-col-9
+### Centennial UMC - St. Anthony Park
+
+St. Paul, MN | A progressive United Methodist church.
+
+#### Eli Project Intern
+ - Wrote and spoke in 1:1 meetings, small groups, and audiences of 50-100 about social justice and ethics, especially LGBTQ rights and interfaith understanding.
+ - Designed, ran, and analyzed a survey to gauge community engagement and attendance.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+### Aug 2014 - Jun 2015
+:::
+
+::: g-col-9
+### City Year Chicago
+
+Chicago, IL | An AmeriCorps national service program for young adults.
+
+#### Corps Member
+ - Provided tutoring, after-school programming, behavioral interventions, and special events for 3rd and 4th grade students at Gresham School of Excellence (Chicago Public Schools).
+ - Administered reading tests to students and used results to tailor reading skills curricula.
+ - Tracked student performance and attendance data to report trends to parents and school staff.
+:::
+:::::
+
+## Volunteer Experience
+
+::::: grid
+::: g-col-3
+### Jan 2026 - Present
+:::
+
+::: g-col-9
+### Wesley Foundation at the University of Minnesota
+
+Minneapolis, MN | A nonprofit supporting a UMN student group for social justice and spirituality.
+
+#### Board Member
+ - Design and run a survey of student participants to better understand community needs and demographics.
+ - Support the finance committee in managing income and expense data, and presenting updates to the board.
+ - Mentor and support students learning about leadership, social justice, and community-building.
+:::
+:::::
+
+
+::::: grid
+::: g-col-3
+### Jul 2025 - Present
+:::
+
+::: g-col-9
+### City of Minneapolis Pedestrian Advisory Committee
+
+Minneapolis, MN | A volunteer committee to advise the City Council on pedestrian safety.
+
+#### Committee Member
+ - Review and discuss transportation and road reconstruction plans from the city, county, and state, and their impact on pedestrians, particularly marginalized groups such as people with disabilities and people who do not drive.
+ - Write, edit, and review committee resolutions offering feedback on transportation policies, projects, and issues that affect pedestrian safety and dignity.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+### Jan 2018 - May 2019
+:::
+
+::: g-col-9
+### University of Minnesota - Twin Cities
+
+Minneapolis, MN
+
+:::
+:::::
+
+::::: grid
+::: g-col-3
+#### Sep 2018 - May 2019
+:::
+
+::: g-col-9
+#### Research Assistant for Dr. Richard Landers' I/O (Workplace) Psychology Lab
+ - Developed a data simulation using R to compare machine-learning algorithms for personnel selection.
+ - Conducted a simulation experiment using supercomputer resources.
+ - Organized and analyzed resulting data to demonstrate the strengths and weaknesses of each algorithm.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+#### May 2018 - Jul 2018
+:::
+
+::: g-col-9
+#### Research Assistant for Dr. Lana Yarosh's Human-Computer Interaction Lab
+ - Developed a Python API to search and organize personal photo albums using facial recognition.
+ - Collaborated with a team to design a prototype interface for the API using JavaScript and Flask.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+#### Jan 2018 - May 2018
+:::
+
+::: g-col-9
+#### Research Assistant for Dr. Nathan Kuncel's I/O (Workplace) Psychology Lab
+ - Coded qualitative data on personality factors that influence K-12 academic admissions decisions.
+ - Discussed research methods and personnel selection literature in weekly lab meetings.
+:::
+:::::
+
+::::: grid
+::: g-col-3
+### Jun 2015 - Aug 2015
+:::
+
+::: g-col-9
+### Fund for the Public Interest - Chicago Office
+
+Chicago, IL | A nonprofit fundraising for social and environmental campaigns.
+
+#### Recruitment Intern
+ - Assisted data management by entering daily fundraising statistics and interview information.
+ - Recruited interview candidates for employment from public spaces and over the phone.
+:::
+:::::
+
+
+## Education
+
+::::: grid
+::: g-col-3
+### Sep 2015 - May 2019
+:::
+
+::: g-col-9
+### University of Minnesota - Twin Cities
+
+Minneapolis, MN
+
+#### B.S. Psychology and B.A. Computer Science
+Spanish Studies minor
+:::
+:::::
+
+## Software Skills
+ - R
+   - Tidyverse
+   - Quarto
+   - Tidymodels
+ - SAS
+ - SQL (Microsoft SQL Server)
+ - Git & GitHub
+ - Microsoft Excel
