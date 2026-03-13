@@ -2,6 +2,16 @@
 title: "Portfolio"
 ---
 
-[My full résumé is available here.](resume.qmd)
+## Demonstration projects
 
-[Portfolio project: When does winter actually start?](seasons.qmd)
+[When does winter actually start?](seasons.qmd)
+
+## Public reports
+
+These are public reports that I worked on at Professional Data Analysts:
+
+-   “802Quits: Tobacco and Nicotine Treatment” for the Vermont Department of Health, Aug 2025 (<https://www.healthvermont.gov/sites/default/files/document/hpdp-tcp-802quits-nicotine-and-tobacco-treatment.pdf>)
+
+-   “Vaping-Related Lung Injury in Vermont: Documenting the Diagnosis” for the Vermont Department of Health, Jun 2025 (<https://www.healthvermont.gov/sites/default/files/document/hpdp-tcp-vaping-related-lung-injury-in-vermont.pdf>)
+
+-   “The State of Tobacco Control in North Dakota: 2023 – 2025” for the North Dakota Department of Health and Human Services, Dec 2024 (<https://www.hhs.nd.gov/sites/www/files/documents/DOH%20Legacy/Tobacco/ND_TPCP_Synthesis_Report_FY2025.pdf>)
