@@ -10,11 +10,11 @@ Hi, I'm Lily, a data analyst in Minneapolis, MN. Contact me at [lily.b.dunk\@pro
 ## Work Experience
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Sep 2019 - Present
 :::
 
-::: g-col-9
+::: g-col-8
 ### Professional Data Analysts
 
 Minneapolis, MN \| A research, evaluation, and consulting firm specializing in public health program evaluations.
@@ -22,14 +22,14 @@ Minneapolis, MN \| A research, evaluation, and consulting firm specializing in p
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 Sep 2019 - Sep 2021\
 Sep 2021 - Dec 2022\
 
 #### Dec 2022 - Present
 :::
 
-::: g-col-9
+::: g-col-8
 Assistant Analyst II\
 Associate Analyst I
 
@@ -46,11 +46,11 @@ Associate Analyst I
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Jun 2019 - Aug 2019
 :::
 
-::: g-col-9
+::: g-col-8
 ### Centennial UMC - St. Anthony Park
 
 St. Paul, MN \| A progressive United Methodist church.
@@ -63,11 +63,11 @@ St. Paul, MN \| A progressive United Methodist church.
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Aug 2014 - Jun 2015
 :::
 
-::: g-col-9
+::: g-col-8
 ### City Year Chicago
 
 Chicago, IL \| An AmeriCorps national service program for young adults.
@@ -83,11 +83,11 @@ Chicago, IL \| An AmeriCorps national service program for young adults.
 ## Volunteer Experience
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Jan 2026 - Present
 :::
 
-::: g-col-9
+::: g-col-8
 ### Wesley Foundation at the University of Minnesota
 
 Minneapolis, MN \| A nonprofit supporting a UMN student group for social justice and spirituality.
@@ -101,11 +101,11 @@ Minneapolis, MN \| A nonprofit supporting a UMN student group for social justice
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Jul 2025 - Present
 :::
 
-::: g-col-9
+::: g-col-8
 ### City of Minneapolis Pedestrian Advisory Committee
 
 Minneapolis, MN \| A volunteer committee to advise the City Council on pedestrian safety.
@@ -118,11 +118,11 @@ Minneapolis, MN \| A volunteer committee to advise the City Council on pedestria
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Jan 2018 - May 2019
 :::
 
-::: g-col-9
+::: g-col-8
 ### University of Minnesota - Twin Cities
 
 Minneapolis, MN
@@ -130,11 +130,11 @@ Minneapolis, MN
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 #### Sep 2018 - May 2019
 :::
 
-::: g-col-9
+::: g-col-8
 #### Research Assistant for Dr. Richard Landers' I/O (Workplace) Psychology Lab
 
 -   Developed a data simulation using R to compare machine-learning algorithms for personnel selection.
@@ -144,11 +144,11 @@ Minneapolis, MN
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 #### May 2018 - Jul 2018
 :::
 
-::: g-col-9
+::: g-col-8
 #### Research Assistant for Dr. Lana Yarosh's Human-Computer Interaction Lab
 
 -   Developed a Python API to search and organize personal photo albums using facial recognition.
@@ -157,11 +157,11 @@ Minneapolis, MN
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 #### Jan 2018 - May 2018
 :::
 
-::: g-col-9
+::: g-col-8
 #### Research Assistant for Dr. Nathan Kuncel's I/O (Workplace) Psychology Lab
 
 -   Coded qualitative data on personality factors that influence K-12 academic admissions decisions.
@@ -170,11 +170,11 @@ Minneapolis, MN
 :::::
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Jun 2015 - Aug 2015
 :::
 
-::: g-col-9
+::: g-col-8
 ### Fund for the Public Interest - Chicago Office
 
 Chicago, IL \| A nonprofit fundraising for social and environmental campaigns.
@@ -189,11 +189,11 @@ Chicago, IL \| A nonprofit fundraising for social and environmental campaigns.
 ## Education
 
 ::::: grid
-::: g-col-3
+::: g-col-4
 ### Sep 2015 - May 2019
 :::
 
-::: g-col-9
+::: g-col-8
 ### University of Minnesota - Twin Cities
 
 Minneapolis, MN
