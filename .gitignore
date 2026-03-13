@@ -48,3 +48,9 @@ rsconnect/
 
 # Quarto temp files
 .quarto
+
+# Data files
+data/
+
+/.quarto/
+**/*.quarto_ipynb
