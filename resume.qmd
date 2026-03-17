@@ -9,31 +9,14 @@ Hi, I'm Lily, a data analyst in Minneapolis, MN. Contact me at [lily.b.dunk\@pro
 
 ## Work Experience
 
-::::: grid
-::: g-col-4
-### Sep 2019 - Present
-:::
-
-::: g-col-8
-### Professional Data Analysts
+### Sep 2019 - Present \| Professional Data Analysts
 
 Minneapolis, MN \| A research, evaluation, and consulting firm specializing in public health program evaluations.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-Sep 2019 - Sep 2021\
-Sep 2021 - Dec 2022\
+Sep 2019 - Sep 2021 \| Assistant Analyst II\
+Sep 2021 - Dec 2022 \| Associate Analyst I\
 
-#### Dec 2022 - Present
-:::
-
-::: g-col-8
-Assistant Analyst II\
-Associate Analyst I
-
-#### Associate Analyst II
+##### Dec 2022 - Present \| Associate Analyst II
 
 -   Clean and analyze data for public health program evaluation projects, drawing conclusions about program efficacy from public monitoring, program utilization, and follow-up survey data.
 -   Lead data analysis for evaluation of tobacco cessation and control programs for the North Dakota Department of Health and Human Services and the Vermont Department of Health.
@@ -42,167 +25,85 @@ Associate Analyst I
 -   Write reports and create tables, charts, and maps to explain analysis methods and communicate results for coworkers, clients, and the general public.
 -   Programmed automated data quality reports in R and Quarto with charts and alerts for easy review, making the data quality monitoring process more comprehensive and efficient.
 -   Wrote technical assistance and reference documents for LimeSurvey software and became the “resident LimeSurvey expert” for creating and managing surveys and training coworkers.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-### Jun 2019 - Aug 2019
-:::
-
-::: g-col-8
-### Centennial UMC - St. Anthony Park
+### Jun 2019 - Aug 2019 | Centennial UMC - St. Anthony Park
 
 St. Paul, MN \| A progressive United Methodist church.
 
-#### Eli Project Intern
+##### Eli Project Intern
 
 -   Wrote and spoke in 1:1 meetings, small groups, and audiences of 50-100 about social justice and ethics, especially LGBTQ rights and interfaith understanding.
 -   Designed, ran, and analyzed a survey to gauge community engagement and attendance.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-### Aug 2014 - Jun 2015
-:::
-
-::: g-col-8
-### City Year Chicago
+### Aug 2014 - Jun 2015 | City Year Chicago
 
 Chicago, IL \| An AmeriCorps national service program for young adults.
 
-#### Corps Member
+##### Corps Member
 
 -   Provided tutoring, after-school programming, behavioral interventions, and special events for 3rd and 4th grade students at Gresham School of Excellence (Chicago Public Schools).
 -   Administered reading tests to students and used results to tailor reading skills curricula.
 -   Tracked student performance and attendance data to report trends to parents and school staff.
-:::
-:::::
 
 ## Volunteer Experience
 
-::::: grid
-::: g-col-4
-### Jan 2026 - Present
-:::
-
-::: g-col-8
-### Wesley Foundation at the University of Minnesota
+### Jan 2026 - Present |  Wesley Foundation at the University of Minnesota
 
 Minneapolis, MN \| A nonprofit supporting a UMN student group for social justice and spirituality.
 
-#### Board Member
+##### Board Member
 
 -   Design and run a survey of student participants to better understand community needs and demographics.
 -   Support the finance committee in managing income and expense data, and presenting updates to the board.
 -   Mentor and support students learning about leadership, social justice, and community-building.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-### Jul 2025 - Present
-:::
-
-::: g-col-8
-### City of Minneapolis Pedestrian Advisory Committee
+### Jul 2025 - Present | City of Minneapolis Pedestrian Advisory Committee
 
 Minneapolis, MN \| A volunteer committee to advise the City Council on pedestrian safety.
 
-#### Committee Member
+##### Committee Member
 
 -   Review and discuss transportation and road reconstruction plans from the city, county, and state, and their impact on pedestrians, particularly marginalized groups such as people with disabilities and people who do not drive.
 -   Write, edit, and review committee resolutions offering feedback on transportation policies, projects, and issues that affect pedestrian safety and dignity.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-### Jan 2018 - May 2019
-:::
-
-::: g-col-8
-### University of Minnesota - Twin Cities
+### Jan 2018 - May 2019 | University of Minnesota - Twin Cities
 
 Minneapolis, MN
-:::
-:::::
 
-::::: grid
-::: g-col-4
-#### Sep 2018 - May 2019
-:::
-
-::: g-col-8
-#### Research Assistant for Dr. Richard Landers' I/O (Workplace) Psychology Lab
+##### Sep 2018 - May 2019 | Research Assistant for Dr. Richard Landers' I/O (Workplace) Psychology Lab
 
 -   Developed a data simulation using R to compare machine-learning algorithms for personnel selection.
 -   Conducted a simulation experiment using supercomputer resources.
 -   Organized and analyzed resulting data to demonstrate the strengths and weaknesses of each algorithm.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-#### May 2018 - Jul 2018
-:::
-
-::: g-col-8
-#### Research Assistant for Dr. Lana Yarosh's Human-Computer Interaction Lab
+##### May 2018 - Jul 2018 | Research Assistant for Dr. Lana Yarosh's Human-Computer Interaction Lab
 
 -   Developed a Python API to search and organize personal photo albums using facial recognition.
 -   Collaborated with a team to design a prototype interface for the API using JavaScript and Flask.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-#### Jan 2018 - May 2018
-:::
-
-::: g-col-8
-#### Research Assistant for Dr. Nathan Kuncel's I/O (Workplace) Psychology Lab
+##### Jan 2018 - May 2018 | Research Assistant for Dr. Nathan Kuncel's I/O (Workplace) Psychology Lab
 
 -   Coded qualitative data on personality factors that influence K-12 academic admissions decisions.
 -   Discussed research methods and personnel selection literature in weekly lab meetings.
-:::
-:::::
 
-::::: grid
-::: g-col-4
-### Jun 2015 - Aug 2015
-:::
-
-::: g-col-8
-### Fund for the Public Interest - Chicago Office
+### Jun 2015 - Aug 2015 | Fund for the Public Interest - Chicago Office
 
 Chicago, IL \| A nonprofit fundraising for social and environmental campaigns.
 
-#### Recruitment Intern
+##### Recruitment Intern
 
 -   Assisted data management by entering daily fundraising statistics and interview information.
 -   Recruited interview candidates for employment from public spaces and over the phone.
-:::
-:::::
 
 ## Education
 
-::::: grid
-::: g-col-4
-### Sep 2015 - May 2019
-:::
-
-::: g-col-8
 ### University of Minnesota - Twin Cities
 
 Minneapolis, MN
 
-#### B.S. Psychology and B.A. Computer Science
-
+##### B.S. Psychology
+##### B.A. Computer Science
 Spanish Studies minor
-:::
-:::::
 
 ## Publications
 
@@ -211,6 +112,16 @@ Spanish Studies minor
 -   Lien, B., **Dunk, L.**, & Richter, S. (2022). Let SAS do the work for you: Tips and tricks for turning SAS output into client-ready tables. *Western Users of SAS Software 2022 Conference Proceedings*. <https://www.wuss.org/proceedings/2022/WUSS-2022-Paper-112.pdf>.
 
 -   Zhang, T., Zhang, Y., Sun, L., & **Dunk, L.** (2019). HelloBox. *Extended Abstracts of the 2019 CHI Conference on Human Factors in Computing Systems*, 1–6. <https://doi.org/10.1145/3290607.3309692>
+
+## Public Report Examples
+
+These are examples of public reports that I worked on at Professional Data Analysts:
+
+-   “802Quits: Tobacco and Nicotine Treatment” for the Vermont Department of Health, Aug 2025 (<https://www.healthvermont.gov/sites/default/files/document/hpdp-tcp-802quits-nicotine-and-tobacco-treatment.pdf>)
+
+-   “Vaping-Related Lung Injury in Vermont: Documenting the Diagnosis” for the Vermont Department of Health, Jun 2025 (<https://www.healthvermont.gov/sites/default/files/document/hpdp-tcp-vaping-related-lung-injury-in-vermont.pdf>)
+
+-   “The State of Tobacco Control in North Dakota: 2023 – 2025” for the North Dakota Department of Health and Human Services, Dec 2024 (<https://www.hhs.nd.gov/sites/www/files/documents/DOH%20Legacy/Tobacco/ND_TPCP_Synthesis_Report_FY2025.pdf>)
 
 ## Software Skills
 
