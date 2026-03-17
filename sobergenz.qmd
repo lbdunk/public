@@ -1,0 +1,587 @@
+---
+title: "Does Gen Z drink less than other generations did?"
+author: "Lily Dunk"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+format:
+  html:
+    toc: true
+---
+
+## Background
+
+In the past few years, I've read various news articles about a supposed trend: that Gen Z (people born between 1997 and 2012) drink less alcohol than previous generations did at the same age:
+
+-   The Conversation, ["The rise of ‘sober curiosity:’ Why Gen Zers are reducing their alcohol consumption"](https://theconversation.com/the-rise-of-sober-curiosity-why-gen-zers-are-reducing-their-alcohol-consumption-243775) (November 2024)
+-   Time Magazine, ["Why Gen Z Is Drinking Less"](https://time.com/7203140/gen-z-drinking-less-alcohol/) (January 2025)
+-   Gallup, ["U.S. Drinking Rate at New Low as Alcohol Concerns Surge"](https://news.gallup.com/poll/693362/drinking-rate-new-low-alcohol-concerns-surge.aspx) (August 2025)
+-   Wall Street Journal, ["Why Generation Z Doesn't Drink Much"](https://www.wsj.com/opinion/why-generation-z-doesnt-drink-much-bdc6ed53) (September 2025)
+-   USA Today, ["Gen Z is ghosting alcohol and changing what a 'night out' looks like"](https://www.usatoday.com/story/money/2026/03/04/gen-z-millennials-drinking-less-alcohol-working-out-more/88864868007/) (March 2026)
+
+These articles reference data from various surveys, and I was curious if I could identify that same trend in the CDC's annual Behavioral Health Risk Factor Surveillance System (BRFSS) survey.
+
+The main questions these articles raise for me are:
+
+Compared to previous generations at the same age...
+
+-   Is Gen Z more likely to be completely sober? (meaning, to not drink at all)?
+-   Does Gen Z drink less often?
+-   Is Gen Z less likely to binge drink?
+
+*and*, if so, is there a greater difference in Gen Z than in other generations? In other words, can the difference be explained by *all* Americans reducing their drinking, or is this a Gen Z-specific phenomenon?
+
+## About the data
+
+Data from the annual BRFSS surveys are [publicly available from the CDC](https://www.cdc.gov/brfss/index.html). The most recent dataset is from the 2024 survey. Due to changes in survey methodology, the CDC advises that recent BRFSS data cannot be directly compared with BRFSS data older than the 2011 survey. So we will compare the 2024 and 2011 surveys.
+
+[The Pew Research Center](https://www.pew.org/en/research-and-analysis/data-visualizations/2019/defining-our-six-generations) uses a standard definition of each generation by birth year:
+
+| Generation        | Birth years  | Age in 2024 |
+|-------------------|--------------|-------------|
+| Generation Z      | 1997 onward  | 21 to 27    |
+| Millennials       | 1981 to 1996 | 27 to 43    |
+| Generation X      | 1965 to 1980 | 43 to 59    |
+| Baby Boomers      | 1946 to 1964 | 59 to 78    |
+| Silent Generation | 1928 to 1945 | 78 to 96    |
+
+Gen Z was born from 1997 onward, so in 2024, the oldest members of Gen Z would have been age 27. Millennials born in 1996 could also have been age 27 in 2024 depending on their birthdate, but for the sake of simplicity, I will group 27-year-old participants with Gen Z.
+
+I also want to exclude people under the legal drinking age, because I suspect that underage drinking could change because of changes to law enforcement, university discipline policies, etc. So our Gen Z sample will be ages 21 to 27, and everyone else will be ages 27+.
+
+This means that our two samples of people ages 21 to 27 will include:
+
+-   those born between 1997 and 2003 (Gen Z), surveyed in 2024, compared to
+-   those born between 1984 and 1990 (Millennials), surveyed in 2011
+
+The BRFSS variables we can use are:
+
+| 2011 variable name | 2024 variable name | Label | Note |
+|----------------|----------------|----------------|-------------------------|
+| \_IMPAGE | \_AGE80 | 2011: Age value used to determine age groups; 2024: Imputed Age value collapsed above 80 | The 2011 dataset does not collapse high ages, but this shouldn't affect our analysis because we are only interested in young people. Both samples are imputed, meaning that if a participant did not report their age, the CDC substituted a statistical estimate of their age. |
+| DROCDY3\_ | DROCDY4\_ | Computed drink-occasions-per-day | Calculated from the number of days participants reported drinking in the past 30 days. This is essentially the proportion of days that the participant drinks. |
+| \_RFBING5 | \_RFBING6 | Binge Drinking Calculated Variable: "Binge drinkers (males having five or more drinks on one occasion, females having four or more drinks on one occasion)" | i.e., reported binge drinking at least once within the past 30 days. Calculated variable based on ALCDAY4/ALCDAY5 and a question asking the number of binge drinking occasions in the last 30 days. |
+
+## Import BRFSS data
+
+```{r}
+here::i_am("sobergenz.qmd")
+
+#' These BRFSS datasets are over 1 gigabyte each, so I converted them from XPT
+#' to R datasets and saved them. I will load those datasets instead of
+#' converting them every time I render this page.
+
+# 2024
+if (FALSE) {
+  brfss24_raw <- haven::read_xpt(here::here("data/LLCP2024.XPT"))
+  saveRDS(brfss24_raw, here::here("data/brfss24_raw.RData"))
+} else {
+  brfss24_raw <- readRDS(here::here("data/brfss24_raw.RData"))
+}
+
+# 2011
+if (FALSE) {
+  brfss11_raw <- haven::read_xpt(here::here("data/LLCP2011.XPT"))
+  saveRDS(brfss11_raw, here::here("data/brfss11_raw.RData"))
+} else {
+  brfss11_raw <- readRDS(here::here("data/brfss11_raw.RData"))
+}
+
+```
+
+## Data cleaning
+
+First, we'll combine our datasets. We'll standardize the variable names for the variables we'll need, and add a variable to indicate the sample year.
+
+```{r}
+# 2024
+brfss24 <- brfss24_raw |>
+  dplyr::rename(
+    age = `_AGE80`,
+    drink_days = `DROCDY4_`,
+    binge_drink = `_RFBING6`
+  ) |>
+  dplyr::select(age, drink_days, binge_drink, `_STSTR`, `_LLCPWT`) |>
+  dplyr::mutate(sample_year = "2024")
+
+# 2011
+brfss11 <- brfss11_raw |>
+  dplyr::rename(
+    age = `_IMPAGE`,
+    drink_days = `DROCDY3_`,
+    binge_drink = `_RFBING5`
+  ) |>
+  dplyr::select(age, drink_days, binge_drink, `_STSTR`, `_LLCPWT`) |>
+  dplyr::mutate(sample_year = "2011")
+
+# Combine
+brfss1 <- list(brfss24, brfss11) |>
+  dplyr::bind_rows() |>
+  dplyr::rename(
+    strata = `_STSTR`,
+    weight = `_LLCPWT`
+  ) |>
+  dplyr::mutate(
+    sample_year = forcats::fct(sample_year, levels = c("2011", "2024"))
+  )
+
+brfss1 |>
+  dplyr::count(sample_year)
+```
+
+Then, we'll use the CDC's documentation on BRFSS [complex sampling weight methods](https://www.cdc.gov/brfss/annual_data/2024/pdf/Complex-Sampling-Weights-and-Preparing-Module-Data-for-Analysis-2024-508.pdf) to adjust the weights now that the sample is combined:
+
+```{r}
+# Get the proportion of each sample year in the overall sample
+prop11 <- (brfss1 |>
+  dplyr::filter(sample_year == "2011") |>
+  nrow()) /
+  nrow(brfss1)
+prop11
+
+prop24 <- (brfss1 |>
+  dplyr::filter(sample_year == "2024") |>
+  nrow()) /
+  nrow(brfss1)
+prop24
+
+prop11 + prop24
+
+# Multiply the weights of each year by that proportion
+brfss2 <- brfss1 |>
+  dplyr::mutate(
+    weight_adj = dplyr::case_when(
+      sample_year == "2011" ~ weight * prop11,
+      sample_year == "2024" ~ weight * prop24
+    )
+  )
+
+#' Adjust the weights so that the total weighted frequency matches the actual
+#' frequency
+brfss3 <- brfss2 |>
+  dplyr::mutate(
+    final_weight = weight_adj * (nrow(brfss2) / sum(brfss2$weight_adj))
+  )
+
+nrow(brfss3)
+sum(brfss3$final_weight)
+
+```
+
+Next, we'll recode the age and alcohol variables based on the CDC's codebooks for each sample. For the proportion of days that participants drink, we'll convert to the number of days that participants drink per month (30 days) for clarity.
+
+```{r}
+brfss <- brfss3 |>
+  dplyr::filter(age >= 21) |>
+  dplyr::mutate(
+    age_group = dplyr::case_when(
+      age <= 27 ~ "Age 21-27",
+      age >= 28 ~ "Age 28+"
+    ) |>
+      forcats::fct(levels = c("Age 21-27", "Age 28+")),
+    #' Per the CDC's data documentation, 900 indicates "Don't know/Not sure" or
+    #' "Refused/Missing", so we will recode it to NA
+    drink_days = dplyr::if_else(
+      drink_days == 900,
+      NA,
+      drink_days
+    ) * (30/100), # divide by 100 to get proportion, multiply by 30 days
+    drink = drink_days > 0,
+    binge_drink = dplyr::recode_values(
+      binge_drink,
+      1 ~ FALSE,
+      2 ~ TRUE,
+      9 ~ NA
+    )
+  )
+
+# Unweighted:
+gtsummary::tbl_summary(
+  brfss,
+  include = c(age_group, drink_days, drink, binge_drink),
+  statistic = list(drink_days = "{mean}"),
+  digits = list(drink_days = 1)
+)
+```
+
+Finally, we'll create a survey design object using the [`survey`](https://r-survey.r-forge.r-project.org/survey/) package, so that all of our analyses will integrate BRFSS strata and weights:
+
+```{r}
+options(survey.lonely.psu = "adjust")
+
+brfss_svy <- survey::svydesign(
+  ids = ~1,
+  strata = ~strata,
+  weights = ~final_weight,
+  data = brfss,
+  check.strata = FALSE,
+  nest = FALSE
+)
+
+# Weighted:
+gtsummary::tbl_svysummary(
+  brfss_svy,
+  include = c(age_group, drink_days, drink, binge_drink),
+  statistic = list(drink_days = "{mean}"),
+  digits = ~ 1
+)
+```
+
+## Analysis
+
+Now we're ready to test our hypotheses.
+
+First, we'll check if our hypothesis is plausible. Without any statistical testing, let's compare the difference in alcohol use by age group and year:
+
+```{r}
+
+gtsummary::tbl_strata(
+  brfss_svy,
+  strata = age_group,
+  .tbl_fun = function(x) {
+    gtsummary::tbl_svysummary(
+      x,
+      include = c(drink, drink_days, binge_drink),
+      by = sample_year,
+      statistic = list(drink_days = "{mean}"),
+      digits = ~ 1
+    )
+  }
+)
+
+```
+
+Here's a simplified version of the same table, adding the differences between age groups and sample years:
+
+```{r}
+#| code-fold: true
+summary_df1 <- brfss_svy |>
+  srvyr::as_survey_design() |>
+  srvyr::summarize(
+    drink_p = srvyr::survey_mean(drink, na.rm = TRUE),
+    drink_days_mean = srvyr::survey_mean(drink_days, na.rm = TRUE),
+    binge_drink_p = srvyr::survey_mean(binge_drink, na.rm = TRUE),
+    .by = c(age_group, sample_year)
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::select(!dplyr::ends_with("_se")) |>
+  tidyr::pivot_longer(
+    cols = c(drink_p, drink_days_mean, binge_drink_p),
+    names_to = "varname"
+  )
+
+# Difference between age groups
+summary_df2 <- summary_df1 |>
+  tidyr::pivot_wider(names_from = age_group, values_from = value) |>
+  dplyr::mutate(
+    agedif = `Age 28+` - `Age 21-27`
+  ) |>
+  tidyr::pivot_longer(
+    cols = !c(sample_year, varname),
+    names_to = "age_group"
+  ) |>
+  tidyr::pivot_wider(
+    names_from = sample_year,
+    values_from = value,
+    names_prefix = "p"
+  ) |>
+  dplyr::mutate(
+    yrdif = p2024 - p2011
+  )
+
+summary_table <- summary_df2 |>
+  gt::gt(row_group_as_column = TRUE) |>
+  gt::tab_row_group(
+    label = "% who drink",
+    rows = varname == "drink_p",
+    id = "drink_p"
+  ) |>
+  gt::tab_row_group(
+    label = "Mean drinking days per month",
+    rows = varname == "drink_days_mean",
+    id = "drink_days_mean"
+  ) |>
+  gt::tab_row_group(
+    label = "% who binge drink",
+    rows = varname == "binge_drink_p",
+    id = "binge_drink_p"
+  ) |>
+  gt::row_group_order(c("drink_p", "drink_days_mean", "binge_drink_p")) |>
+  # Column headers
+  gt::cols_hide("varname") |>
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    location = gt::cells_column_labels(columns = c(1:4))
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(style = "italic"),
+    location = gt::cells_column_labels(columns = 5)
+  ) |>
+  gt::cols_label(
+    age_group = "Age group",
+    p2011 = "2011",
+    p2024 = "2024",
+    yrdif = "Difference between sample years"
+  ) |>
+  # Percent formatting
+  gt::fmt(
+    columns = c(p2011, p2024),
+    rows = age_group != "agedif" & varname != "drink_days_mean",
+    fns = scales::label_percent(accuracy = 0.1)
+  ) |>
+  gt::fmt(
+    columns = c(p2011, p2024),
+    rows = age_group != "agedif" & varname == "drink_days_mean",
+    fns = scales::label_number(accuracy = 0.1)
+  ) |>
+  gt::fmt(
+    columns = c(p2011, p2024),
+    rows = age_group == "agedif" & varname != "drink_days_mean",
+    fns = scales::label_percent(accuracy = 0.1, style_positive = "plus")
+  ) |>
+  gt::fmt(
+    columns = c(p2011, p2024),
+    rows = age_group == "agedif" & varname == "drink_days_mean",
+    fns = scales::label_number(accuracy = 0.1, style_positive = "plus")
+  ) |>
+  gt::fmt(
+    columns = yrdif,
+    rows = varname != "drink_days_mean",
+    fns = scales::label_percent(accuracy = 0.1, style_positive = "plus")
+  ) |>
+  gt::fmt(
+    columns = yrdif,
+    rows = varname == "drink_days_mean",
+    fns = scales::label_number(accuracy = 0.1, style_positive = "plus")
+  ) |>
+  # Cell styles
+  gt::tab_style(
+    style = gt::cell_text(style = "italic"),
+    location = gt::cells_body(columns = yrdif)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(style = "italic"),
+    location = gt::cells_body(rows = age_group == "agedif")
+  ) |>
+  gt::text_replace("agedif", "Difference between age groups")
+
+summary_table
+```
+
+We can see that both age groups reduced their drinking across all three variables, and the Age 21-27 group reduced their drinking more. So our hypothesis is plausible - we'll just need to determine if the difference-in-difference is statistically significant.
+
+### Regression model walkthrough
+
+For each variable, we're not just testing if drinking increased from 2011 to 2024; we're testing if drinking increased from 2011 to 2024 *more* for the 21-27 age group than it did for the 28+ age group. Since we are looking at the relationship between three different variables (alcohol use, age group, and sample year), we'll use a regression analysis instead of a more typical statistical test like a chi-squared test or a t-test.
+
+We'll create a generalized linear model using the `survey` package to predict each variable based on age group, sample year, and an interaction between the two. We can then use the regression coefficients to understand how those predictors affect the outcome.
+
+```{r}
+brfss_glm1 <- survey::svyglm(
+  formula = drink ~ age_group * sample_year,
+  design = brfss_svy
+)
+brfss_glm1
+```
+```{r}
+#| code-fold: true
+
+# Colors
+teal <- "#66C2A5"
+darkteal <- "#1B9E77"
+orange <- "#FC8D62"
+darkorange <- "#D95F02"
+purple <- "#8DA0CB"
+darkpurple <- "#7570B3"
+pink <- "#E78AC3"
+darkpink <- "#E7298A"
+
+# Output table
+brfss_glm1 |>
+  broom::tidy() |>
+  gt::gt() |>
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    location = gt::cells_column_labels()
+  ) |>
+  gt::fmt_number(
+    columns = c(estimate, statistic),
+    decimals = 3,
+    suffixing = TRUE
+  ) |>
+  gt::fmt_number(columns = std.error, n_sigfig = 3, suffixing = TRUE) |>
+  gt::fmt(columns = p.value, fns = scales::label_pvalue()) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkteal, weight = "bold"),
+    locations = gt::cells_body(columns = 2, rows = 1)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkorange, weight = "bold"),
+    locations = gt::cells_body(columns = 2, rows = 2)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkpurple, weight = "bold"),
+    locations = gt::cells_body(columns = 2, rows = 3)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkpink, weight = "bold"),
+    locations = gt::cells_body(columns = 2, rows = 4)
+  )
+```
+
+The [intercept]{style="color:#66C2A5;font-weight:bold"} is the estimate for the baseline groups: age 21-27 and sample year 2011.
+
+The [age_group coefficient]{style="color:#FC8D62;font-weight:bold"} is the estimated difference between the age groups when the sample year is kept constant (2011). The [sample_year coefficient]{style="color:#8DA0CB;font-weight:bold"} is the estimated difference between the sample years when the age group is kept constant (Age 21-27). The p-values for both of these coefficients are <0.001, so we know that there is a significant difference between the age groups in 2011 and a significant difference between the sample years for Age 21-27.
+
+The [interaction coefficient]{style="color:#E78AC3;font-weight:bold"} tells us about both variables. This is the difference between the differences: Between 2011 and 2024, the proportion of participants who drink decreased by 7% *less* for Age 28+ than it did for Age 21-27. And because the p-value for the interaction coefficient is also <0.001, we know that the difference is statistically significant.
+
+Here is the same simplified table as above, but with the text colors changed to match the regression coefficients:
+
+```{r}
+#| code-fold: true
+summary_table |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkteal, weight = "bold"),
+    locations = gt::cells_body(columns = 3, rows = 1)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkorange, weight = "bold"),
+    locations = gt::cells_body(columns = 3, rows = 3)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkpurple, weight = "bold"),
+    locations = gt::cells_body(columns = 5, rows = 1)
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(color = darkpink, weight = "bold"),
+    locations = gt::cells_body(columns = 5, rows = 3)
+  )
+```
+
+Our first research question was: **Is Gen Z more likely to be completely sober? (meaning, to not drink at all)?** We're using "did not drink in the past 30 days" as a proxy here, but the answer is yes.
+
+Let's repeat the same process for our other two variables.
+
+### Drinking days
+
+Mean days per month that participants drink:
+```{r}
+brfss_glm2 <- survey::svyglm(
+  formula = drink_days ~ age_group * sample_year,
+  design = brfss_svy
+)
+brfss_glm2
+
+brfss_glm2 |>
+  broom::tidy() |>
+  gt::gt() |>
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    location = gt::cells_column_labels()
+  ) |>
+  gt::fmt_number(
+    columns = c(estimate, statistic),
+    decimals = 3,
+    suffixing = TRUE
+  ) |>
+  gt::fmt_number(columns = std.error, n_sigfig = 3, suffixing = TRUE) |>
+  gt::fmt(columns = p.value, fns = scales::label_pvalue())
+```
+
+While the difference of differences here is statistically significant, it's less than 1 day. Let's look at the distributions of drinking days per month for some context about whether this difference is significant:
+
+```{r}
+#| code-fold: true
+library(ggplot2)
+
+brfss_days <- brfss_svy |>
+  srvyr::as_survey_design() |>
+  srvyr::survey_count(age_group, sample_year, drink_days) |>
+  tidyr::drop_na(drink_days) |>
+  dplyr::mutate(
+    drink_days_cat = dplyr::case_when(
+      drink_days == 0 ~ "0",
+      drink_days <= 5 ~ "1-5",
+      drink_days <= 10 ~ "6-10",
+      drink_days <= 15 ~ "11-15",
+      drink_days <= 20 ~ "16-20",
+      drink_days <= 25 ~ "21-25",
+      drink_days <= 30 ~ "26-30"
+    ) |>
+      forcats::fct(
+        levels = c("0", "1-5", "6-10", "11-15", "16-20", "21-25", "26-30")
+      )
+  ) |>
+  dplyr::mutate(
+    p = n / sum(n),
+    .by = c(age_group, sample_year)
+  )
+
+compare_distributions <- function(x) {
+  ggplot() +
+    geom_col(
+      data = dplyr::filter(x, sample_year == "2011"),
+      mapping = aes(x = drink_days_cat, y = p, fill = sample_year),
+      alpha = 0.5
+    ) +
+    geom_col(
+      data = dplyr::filter(x, sample_year == "2024"),
+      mapping = aes(x = drink_days_cat, y = p, fill = sample_year),
+      alpha = 0.3
+    ) +
+    scale_y_continuous(labels = scales::label_percent()) +
+    labs(
+      x = "Drinking days per month",
+      fill = "Sample year",
+      y = NULL
+    )
+}
+
+brfss_days |>
+  dplyr::filter(age_group == "Age 21-27") |>
+  compare_distributions() +
+  labs(title = "Age 21-27")
+
+brfss_days |>
+  dplyr::filter(age_group == "Age 28+") |>
+  compare_distributions() +
+  labs(title = "Age 28+")
+```
+
+We can see in the distributions that the change is actually more pronounced for Age 21-27 than for Age 28+, so that supports our hypothesis that the difference in differences is significant. Our second research question was: **Does Gen Z drink less often?** We can answer yes.
+
+### Binge drinking
+
+Proportion of participants who binge drink:
+```{r}
+brfss_glm3 <- survey::svyglm(
+  formula = binge_drink ~ age_group * sample_year,
+  design = brfss_svy
+)
+brfss_glm3
+
+brfss_glm3 |>
+  broom::tidy() |>
+  gt::gt() |>
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    location = gt::cells_column_labels()
+  ) |>
+  gt::fmt_number(
+    columns = c(estimate, statistic),
+    decimals = 3,
+    suffixing = TRUE
+  ) |>
+  gt::fmt_number(columns = std.error, n_sigfig = 3, suffixing = TRUE) |>
+  gt::fmt(columns = p.value, fns = scales::label_pvalue())
+```
+
+The difference of differences here for binge drinking is 9.8% and our p-value is <0.001, so we can conclude that it's statistically significant. Our third research question was: **Is Gen Z less likely to binge drink?** We can confidently answer yes.
+
+To recap:
+
+Compared to previous generations at the same age...
+
+-   Is Gen Z more likely to be completely sober? (meaning, to not drink at all)? **Yes.**
+-   Does Gen Z drink less often? **Yes.**
+-   Is Gen Z less likely to binge drink? **Yes.**
+
+There are plenty of practical applications of this knowledge, particularly for public health. In my everyday life, it means I'm happy to see more NA options on the drinks menu!
