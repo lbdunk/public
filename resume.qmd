@@ -3,6 +3,7 @@ title: "Lily Dunk"
 format:
   html:
     toc: true
+    toc-depth: 2
 ---
 
 Hi, I'm Lily, a data analyst in Minneapolis, MN. Contact me at [lily.b.dunk\@protonmail.com](mailto:lily.b.dunk@protonmail.com).
