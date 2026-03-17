@@ -2,14 +2,21 @@ project:
   type: website
   output-dir: docs
 
+execute:
+  freeze: auto
+
 website:
   title: "Lily Dunk"
   navbar:
     left:
       - href: resume.qmd
         text: Résumé
-      - href: portfolio.qmd
-        text: Portfolio
+      - text: Portfolio
+        menu:
+        - text: When does winter start?
+          href: seasons.qmd
+        - text: Does Gen Z drink less?
+          href: sobergenz.qmd
   page-footer: "Contact me at lily.b.dunk@protonmail.com"
 
 format:
